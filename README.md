@@ -31,3 +31,4 @@ You can use:
 [Naikzer](https://github.com/Naikzer) 
 
 ## I juste converte and edit 
+- [RDX Framework Discord](https://discord.gg/VkhUUGHpNs)
