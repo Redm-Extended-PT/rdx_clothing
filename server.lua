@@ -13,7 +13,7 @@ AddEventHandler('rdx_clothing:Save', function(clothes, price, saveOutfit , name,
     local identifier = ukko.getIdentifier()
         local currentMoney = xPlayer.getMoney()
         print (currentMoney)
-        if currentMoney >= currentMoney then
+        if currentMoney >= _price then
            xPlayer.removeMoney(_price) --user.removeMoney(_price)
             TriggerEvent("rdx_clothing:retrieveClothes", identifier, function(call)
 
