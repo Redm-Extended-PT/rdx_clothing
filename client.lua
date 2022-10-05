@@ -19,7 +19,7 @@ Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
 		local coords = GetEntityCoords(PlayerPedId())
-        Citizen.InvokeNative(0x2A32FAA57B937173, 0x6903B113, Config.ZonasR['roupa'].x, Config.ZonasR['roupa'].y, Config.ZonasR['roupa'].z - 1.0, 0, 0, 0, 0, 0, 0, 1.0, 1.0, 0.9, 255, 255, 0, 155, 0, 0, 2, 0, 0, 0, 0)
+                Citizen.InvokeNative(0x2A32FAA57B937173, 0x6903B113, Config.ZonasR['roupa'].x, Config.ZonasR['roupa'].y, Config.ZonasR['roupa'].z - 1.0, 0, 0, 0, 0, 0, 0, 1.0, 1.0, 0.9, 255, 255, 0, 155, 0, 0, 2, 0, 0, 0, 0)
 		Citizen.InvokeNative(0x2A32FAA57B937173, 0x6903B113, Config.ZonasR['roupa1'].x, Config.ZonasR['roupa1'].y, Config.ZonasR['roupa1'].z - 1.0, 0, 0, 0, 0, 0, 0, 1.0, 1.0, 0.9, 255, 255, 0, 155, 0, 0, 2, 0, 0, 0, 0)
 		Citizen.InvokeNative(0x2A32FAA57B937173, 0x6903B113, Config.ZonasR['roupa2'].x, Config.ZonasR['roupa2'].y, Config.ZonasR['roupa2'].z - 1.0, 0, 0, 0, 0, 0, 0, 1.0, 1.0, 0.9, 255, 255, 0, 155, 0, 0, 2, 0, 0, 0, 0)
 		Citizen.InvokeNative(0x2A32FAA57B937173, 0x6903B113, Config.ZonasR['roupa3'].x, Config.ZonasR['roupa3'].y, Config.ZonasR['roupa3'].z - 1.0, 0, 0, 0, 0, 0, 0, 1.0, 1.0, 0.9, 255, 255, 0, 155, 0, 0, 2, 0, 0, 0, 0)
@@ -202,8 +202,6 @@ Citizen.CreateThread(function()
     end
 end)
 
-
-
 Citizen.CreateThread(function()
     while adding2 do
         Citizen.Wait(0)
@@ -366,7 +364,9 @@ RegisterNUICallback('exit', function()
     isSkinCreatorOpened = false
     ShowSkinCreator(false)
     destory()
+    TriggerServerEvent("rdx_skin:loadSkin")
 end)
+
 RegisterNUICallback('saveClothes', function(data, cb)
     SetNuiFocus(false, false)
 
@@ -398,14 +398,9 @@ RegisterNUICallback('saveClothes', function(data, cb)
             end
         end)
     end
-
-
-    --	print("tak2")
     DestroyAllCams()
     isSkinCreatorOpened = false
     ShowSkinCreator(false)
-	 TriggerServerEvent("rdx_clothing:loadClothes", 3, function(cb)
-        end)
 end)
 
 
@@ -415,9 +410,6 @@ AddEventHandler('rdx_clothing:load2', function()
         end)
     fast = true
 end)
-
-
-
 
 RegisterNUICallback('updateClothes', function(data, cb)
     TriggerEvent("rdx_clothing:updateClothes" , data)
@@ -631,10 +623,6 @@ AddEventHandler('rdx_clothing:updateClothes', function(data)
 
 end)
 
-
-
-
-
 function zmiana(wartosc)
     local wartosc2 = tonumber(wartosc)
 	print(wartosc2)
@@ -741,7 +729,6 @@ function zmiana(wartosc)
 			Citizen.InvokeNative(0xAAB86462966168CE, PlayerPedId(), 1)
 			Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0)	
 end
-
 
 RegisterNetEvent('rdx_clothing:load')
 AddEventHandler('rdx_clothing:load', function(skin, ubranie , target)
@@ -931,9 +918,6 @@ Citizen.CreateThread(function()
 		 TriggerEvent('rdx_identity:removeLoadingScreen')
 		end
     else
-			--Citizen.InvokeNative(0xD3A7B003ED343FD9, _target,0x10F5497A,true,true,true) -- PANTS
-           -- Citizen.InvokeNative(0xD3A7B003ED343FD9, _target,0x14511493,true,true,true) -- COAT
-
             SetEntityAlpha(_target, 0)
             glowna = lista_maska_f
             wartosc = tonumber(_ubranie.mask)
@@ -1266,13 +1250,12 @@ function Outfits()
     )
 
 end
+
 local elements_outfits_manage = {
     {label = "Ustaw", value = "SetOutfits" , desc =  "Dress your outfit" },
     {label = "Usuń", value = "DeleteOutfit" , desc =  "Take off your outfit" },
-
-
-
 }
+
 function OutfitsManage(outfit)
 
     MenuData.CloseAll()
@@ -1346,5 +1329,3 @@ Citizen.CreateThread(function()
         end
     end
 end)
-
-
